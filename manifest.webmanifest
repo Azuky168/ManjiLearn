@@ -6,30 +6,194 @@
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
- "display_override": ["standalone", "minimal-ui"],
+ "display_override": [
+  "standalone",
+  "minimal-ui"
+ ],
  "orientation": "portrait",
  "background_color": "#0e1220",
  "theme_color": "#0e1220",
  "lang": "fr",
  "dir": "ltr",
- "categories": ["education", "productivity"],
+ "categories": [
+  "education",
+  "productivity"
+ ],
  "prefer_related_applications": false,
  "icons": [
-  {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
-  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
-  {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
  ],
  "shortcuts": [
-  {"name": "Guide", "short_name": "Guide", "description": "Par quoi commencer", "url": "./?go=guide", "icons": [{"src": "icon-192.png", "sizes": "192x192", "type": "image/png"}]},
-  {"name": "Jeu", "short_name": "Jeu", "description": "Symboles qui tombent", "url": "./?go=game", "icons": [{"src": "icon-192.png", "sizes": "192x192", "type": "image/png"}]},
-  {"name": "Quiz", "short_name": "Quiz", "description": "Teste tes connaissances", "url": "./?go=quiz", "icons": [{"src": "icon-192.png", "sizes": "192x192", "type": "image/png"}]},
-  {"name": "Traduire", "short_name": "Traduire", "description": "Texte ou photo", "url": "./?go=tr", "icons": [{"src": "icon-192.png", "sizes": "192x192", "type": "image/png"}]}
+  {
+   "name": "Guide",
+   "short_name": "Guide",
+   "description": "Par quoi commencer",
+   "url": "./?go=guide",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Mots",
+   "short_name": "Mots",
+   "description": "Le mot du moment",
+   "url": "./?go=home",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Jeu",
+   "short_name": "Jeu",
+   "description": "Symboles qui tombent",
+   "url": "./?go=game",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Quiz",
+   "short_name": "Quiz",
+   "description": "Teste tes connaissances",
+   "url": "./?go=quiz",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Traduire",
+   "short_name": "Traduire",
+   "description": "Texte ou photo",
+   "url": "./?go=tr",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Écritures",
+   "short_name": "Écritures",
+   "description": "Hiragana, katakana, kanji",
+   "url": "./?go=kana",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Lecture",
+   "short_name": "Lecture",
+   "description": "Textes et radio",
+   "url": "./?go=rd",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Sensei",
+   "short_name": "Sensei",
+   "description": "Discuter en japonais",
+   "url": "./?go=bot",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Profil",
+   "short_name": "Profil",
+   "description": "Série et réglages",
+   "url": "./?go=me",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  }
  ],
  "screenshots": [
-  {"src": "screenshots/narrow-1.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "Le Guide pas à pas"},
-  {"src": "screenshots/narrow-2.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "Le mot du moment"},
-  {"src": "screenshots/narrow-3.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "Le jeu et ton historique"},
-  {"src": "screenshots/wide-1.png", "sizes": "1280x720", "type": "image/png", "form_factor": "wide", "label": "Le Guide pas à pas"},
-  {"src": "screenshots/wide-2.png", "sizes": "1280x720", "type": "image/png", "form_factor": "wide", "label": "Le jeu et ton historique"}
+  {
+   "src": "screenshots/narrow-1.png",
+   "sizes": "780x1688",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Le Guide pas à pas"
+  },
+  {
+   "src": "screenshots/narrow-2.png",
+   "sizes": "780x1688",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Le mot du moment"
+  },
+  {
+   "src": "screenshots/narrow-3.png",
+   "sizes": "780x1688",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Le jeu et ton historique"
+  },
+  {
+   "src": "screenshots/wide-1.png",
+   "sizes": "1280x720",
+   "type": "image/png",
+   "form_factor": "wide",
+   "label": "Le Guide pas à pas"
+  },
+  {
+   "src": "screenshots/wide-2.png",
+   "sizes": "1280x720",
+   "type": "image/png",
+   "form_factor": "wide",
+   "label": "Le jeu et ton historique"
+  }
  ]
 }
