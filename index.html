@@ -69,29 +69,30 @@ button{transition:transform .12s}button:active:not(:disabled){transform:scale(.9
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 textarea{resize:vertical;min-height:84px}
 
-/* Thèmes Liquid Glass */
-[data-t=glassl]{--bg:#e6edfb;--fg:#0f1530;--ac:#2f6bff;--cd:rgba(255,255,255,.42);--on:#fff;--gl:rgba(244,247,255,.95);--rim:rgba(255,255,255,.75);--sh:rgba(40,60,140,.18);--bd:rgba(255,255,255,.7)}
-[data-t=glassd]{--bg:#070a14;--fg:#f2f5ff;--ac:#7aa7ff;--cd:rgba(255,255,255,.09);--on:#06101f;--gl:rgba(16,21,40,.95);--rim:rgba(255,255,255,.28);--sh:rgba(0,0,0,.5);--bd:rgba(255,255,255,.16)}
-[data-t^=glass] body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none}
+/* Thèmes Liquid Glass : aucun flou d'arrière-plan (trop lourd sur mobile). Le fond est déjà doux, l'effet verre vient des dégradés, bordures et reflets. */
+[data-t=glassl]{--bg:#e6edfb;--fg:#0f1530;--ac:#2f6bff;--cd:rgba(255,255,255,.5);--on:#fff;--gl:rgba(244,247,255,.97);--rim:rgba(255,255,255,.85);--sh:rgba(40,60,140,.14);--bd:rgba(255,255,255,.75)}
+[data-t=glassd]{--bg:#070a14;--fg:#f2f5ff;--ac:#7aa7ff;--cd:rgba(255,255,255,.1);--on:#06101f;--gl:rgba(16,21,40,.97);--rim:rgba(255,255,255,.3);--sh:rgba(0,0,0,.4);--bd:rgba(255,255,255,.17)}
+[data-t^=glass] body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;transform:translateZ(0)}
 [data-t=glassl] body::before{background:radial-gradient(38% 32% at 18% 22%,#ff9fc4 0,transparent 70%),radial-gradient(40% 34% at 82% 18%,#8ec5ff 0,transparent 70%),radial-gradient(42% 36% at 70% 80%,#b9a3ff 0,transparent 70%),radial-gradient(36% 30% at 15% 78%,#8ff0d2 0,transparent 70%)}
 [data-t=glassd] body::before{background:radial-gradient(38% 32% at 18% 22%,rgba(255,64,140,.55) 0,transparent 70%),radial-gradient(40% 34% at 82% 18%,rgba(40,120,255,.55) 0,transparent 70%),radial-gradient(42% 36% at 70% 80%,rgba(130,70,255,.5) 0,transparent 70%),radial-gradient(36% 30% at 15% 78%,rgba(0,200,170,.4) 0,transparent 70%)}
-[data-t^=glass] .card,[data-t^=glass] #tu .card,[data-t^=glass] #ub{-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,0) 42%),var(--cd);border:1px solid var(--bd);box-shadow:inset 0 1px 1px var(--rim),inset 0 -1px 1px rgba(255,255,255,.08),0 12px 32px var(--sh)}
-[data-t^=glass] button{background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.04)),var(--cd);border:1px solid var(--bd);box-shadow:inset 0 1px 1px var(--rim)}
-[data-t^=glass] .p,[data-t^=glass] .on{background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,0) 60%),var(--ac)!important;border-color:rgba(255,255,255,.55);box-shadow:inset 0 1px 1px rgba(255,255,255,.8),0 6px 18px color-mix(in srgb,var(--ac) 45%,transparent)}
+[data-t^=glass] .card,[data-t^=glass] #ub{background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,0) 45%),var(--cd);border:1px solid var(--bd);box-shadow:inset 0 1px 0 var(--rim),0 4px 14px var(--sh)}
+[data-t^=glass] button{background:var(--cd);border:1px solid var(--bd);box-shadow:inset 0 1px 0 var(--rim)}
+[data-t^=glass] .p,[data-t^=glass] .on{background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0) 60%),var(--ac)!important;border-color:rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
 [data-t^=glass] .star,[data-t^=glass] .hd,[data-t^=glass] .dl{background:none;border:0;box-shadow:none}
 [data-t^=glass] .dl:hover,[data-t^=glass] .dl.cur{background:var(--cd)}
 [data-t^=glass] .star.on svg{fill:#ffc83d}
 [data-t^=glass] #hb{border-radius:16px}
-[data-t^=glass].dmv .card,[data-t^=glass].dmv #tu .card{-webkit-backdrop-filter:none;backdrop-filter:none}
-[data-t^=glass] #dw{background:var(--gl);border-right:1px solid var(--bd);will-change:auto}
-[data-t^=glass] #mini{background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,0) 60%),var(--ac);border:1px solid rgba(255,255,255,.5)}
-[data-t^=glass] input[type=text],[data-t^=glass] input[type=password],[data-t^=glass] input[type=number],[data-t^=glass] textarea,[data-t^=glass] select{background:var(--cd);border:1px solid var(--bd);box-shadow:inset 0 1px 3px var(--sh)}
-[data-t^=glass] #area{background:var(--cd);border:1px solid var(--bd);box-shadow:inset 0 1px 1px var(--rim)}
+[data-t^=glass] #dw{background:var(--gl);border-right:1px solid var(--bd)}
+[data-t^=glass] #mini{background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0) 60%),var(--ac);border:1px solid rgba(255,255,255,.5)}
+[data-t^=glass] input[type=text],[data-t^=glass] input[type=password],[data-t^=glass] input[type=number],[data-t^=glass] textarea,[data-t^=glass] select{background:var(--cd);border:1px solid var(--bd)}
+[data-t^=glass] #area{background:var(--cd);border:1px solid var(--bd)}
 [data-t^=glass] .ms.a{background:var(--cd);border:1px solid var(--bd)}
 [data-t^=glass] .bar{background:rgba(128,128,128,.22)}
 [data-t^=glass] .gd .nb,[data-t^=glass] .gd .tp,[data-t^=glass] .st div{background:rgba(255,255,255,.18)}
 [data-t^=glass] .ok{background:#2fa84f!important}[data-t^=glass] .ko{background:#d6334a!important}
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){[data-t=glassl]{--cd:rgba(255,255,255,.82);--gl:rgba(246,249,255,.96)}[data-t=glassd]{--cd:rgba(40,48,80,.88);--gl:rgba(18,24,46,.97)}}
+/* Mode performance : coupe ombres, animations et fond décoratif */
+.perf *,.perf *::before,.perf *::after{box-shadow:none!important;transition:none!important;animation:none!important;text-shadow:none!important}
+.perf body::before{display:none}[data-t^=glass].perf .card{background:var(--cd)}
 .gd{padding:0}.gd>summary{list-style:none;display:flex;gap:12px;align-items:center;cursor:pointer;padding:14px 16px}.gd>summary::-webkit-details-marker{display:none}
 .gd .nb{width:38px;height:38px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:900;flex:none}.gd.dn .nb{background:var(--ac);color:var(--on)}
 .gd .bd{padding:0 16px 16px}.gd ul{margin:8px 0 10px 18px;line-height:1.5}.gd li{margin-bottom:6px}.gd .tp{background:var(--bg);border-radius:12px;padding:10px 12px;line-height:1.45;margin:8px 0}
@@ -141,7 +142,7 @@ const DZ=`envoyer|送る|okuru|おくる;recevoir (un colis)|受け取る|uketor
 DICT.push(...DZ.split(";").map(x=>{const a=x.split("|");return{fr:a[0],jp:a[1],ro:a[2],kn:a[3]||a[1]}}));
 {const sn=new Set;DICT.splice(0,DICT.length,...DICT.filter(e=>{const k=e.fr+e.jp;return!sn.has(k)&&sn.add(k)}))}
 {const have=new Set(W.map(w=>w[0]));DICT.forEach(e=>{if(e.jp&&e.fr&&!have.has(e.jp)){have.add(e.jp);const w=[e.jp,e.kn,e.ro,e.fr,"vocabulaire"];W.push(w);const k={c:w[0],kn:w[1],r:w[2],m:w[3],t:"w"};WW.push(k);DS.push(k)}})}
-let S={th:"nuit",cu:{bg:"#1b1230",fg:"#fdf2ff",ac:"#ff7ad9",cd:"#2c1f4a"},lk:{},lw:{},wi:0,iv:6e5,st:Date.now(),pz:0,rem:0,str:0,bst:0,last:"",days:[],res:[],wr:{},best:0,rf:{},snd:1,cq:[],km:0,ev:[],gh:1,tu:0,fav:[],vs:.5,vv:1,rc:[],dk:{},rk:{},vr:.8,ph:[],fw:[],fu:1,rs:1,lvl:"auto",em:"c",sp:1,ml:"ja-JP",chat:[],gsel:{},gm:[],lot:0,vl:0,tml:"fr-FR"};
+let S={th:"nuit",cu:{bg:"#1b1230",fg:"#fdf2ff",ac:"#ff7ad9",cd:"#2c1f4a"},lk:{},lw:{},wi:0,iv:6e5,st:Date.now(),pz:0,rem:0,str:0,bst:0,last:"",days:[],res:[],wr:{},best:0,rf:{},snd:1,cq:[],km:0,ev:[],gh:1,tu:0,fav:[],vs:.5,vv:1,rc:[],dk:{},rk:{},vr:.8,ph:[],fw:[],fu:1,rs:1,lvl:"auto",em:"c",sp:1,ml:"ja-JP",chat:[],gsel:{},gm:[],lot:0,vl:0,tml:"fr-FR",perf:0};
 const DEF=JSON.parse(JSON.stringify(S));
 try{Object.assign(S,JSON.parse(localStorage.manjilearn||"{}"))}catch(e){}
 S.gsel=S.gsel||{};S.gm=S.gm||[];S.lot=S.lot||0;S.vl=S.vl||0;
@@ -149,7 +150,7 @@ if(!S.v2){S.th="nuit";S.v2=1}
 const save=()=>{try{localStorage.manjilearn=JSON.stringify(S)}catch(e){}};
 const bar=p=>`<div class="bar"><i style="width:${p}%"></i></div>`;
 const lum=h=>{const n=parseInt(h.slice(1),16);return(.299*(n>>16)+.587*(n>>8&255)+.114*(n&255))/255};
-function theme(){const r=document.documentElement;["--bg","--fg","--ac","--cd","--on"].forEach(p=>r.style.removeProperty(p));
+function theme(){document.documentElement.classList.toggle("perf",!!S.perf);const r=document.documentElement;["--bg","--fg","--ac","--cd","--on"].forEach(p=>r.style.removeProperty(p));
 if(S.th=="perso"){const c=S.cu;r.removeAttribute("data-t");r.style.setProperty("--bg",c.bg);r.style.setProperty("--fg",c.fg);r.style.setProperty("--ac",c.ac);r.style.setProperty("--cd",c.cd);r.style.setProperty("--on",lum(c.ac)>.55?"#000":"#fff")}else r.dataset.t=S.th}
 const cur=()=>S.last==dy()||S.last==dy(1)?S.str:0;
 function act(){const t=dy();if(S.last==t)return;S.str=S.last==dy(1)?S.str+1:1;S.bst=Math.max(S.bst,S.str);S.last=t;S.days=[...S.days,t].slice(-60);save()}
@@ -420,7 +421,7 @@ if(on){sfx.ok();const r=b.getBoundingClientRect();burst(r.left+r.width/2,r.top+r
 function cgo(id){dgo(0);go(id)}
 function pgo(id){dgo(0);if(!S.cq.find(x=>x.id==id))return;go("quiz");qt="p";cplay(id)}
 let dp=0,dvl=0,dtg=0,draf=0,gx=null;const DW=()=>Math.min(300,innerWidth*.82);
-function dset(p){dp=p;document.documentElement.classList.toggle("dmv",p>.001);const w=DW(),d=$("#dw"),b=$("#bd");d.style.transform=`translateX(${(Math.min(p,1.04)-1)*w}px)`;b.style.opacity=Math.max(0,Math.min(1,p));b.style.pointerEvents=p>.01?"auto":"none";d.style.visibility=p>.001?"visible":"hidden";$("#hb").style.setProperty("--p",Math.max(0,Math.min(1,p)))}
+function dset(p){dp=p;const w=DW(),d=$("#dw"),b=$("#bd");d.style.transform=`translateX(${(Math.min(p,1.04)-1)*w}px)`;b.style.opacity=Math.max(0,Math.min(1,p));b.style.pointerEvents=p>.01?"auto":"none";d.style.visibility=p>.001?"visible":"hidden";$("#hb").style.setProperty("--p",Math.max(0,Math.min(1,p)))}
 function dgo(t,v=0){cancelAnimationFrame(draf);dtg=t;$("#hb").setAttribute("aria-expanded",t==1);if(t==1)dwr();
 if(matchMedia("(prefers-reduced-motion:reduce)").matches){dset(t);return}
 dvl=v;let last=performance.now();const st=n=>{const dt=Math.min(.032,(n-last)/1e3);last=n;dvl+=(-170*(dp-dtg)-20*dvl)*dt;dset(dp+dvl*dt);if(Math.abs(dp-dtg)<.002&&Math.abs(dvl)<.03){dset(dtg);return}draf=requestAnimationFrame(st)};draf=requestAnimationFrame(st)}
@@ -572,7 +573,7 @@ if(!ALL.some(k=>k.t=="x"&&k.c==c)){S.dk[c]={r,m};const k={c,r,m,t:"x"};ALL.push(
 /* Effets */
 let AC;const tone=(f,d=.08,ty="sine",v=.15,t0=0)=>{if(!S.snd||!S.vs)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state=="suspended")AC.resume();const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+t0;o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(v*S.vs*2,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}};
 const sfx={click:()=>tone(520,.06,"triangle"),pop:()=>tone(780,.09,"sine",.18),ok:()=>{tone(660,.1);tone(880,.12,"sine",.15,.09);tone(1320,.2,"sine",.12,.18)},ko:()=>{tone(220,.18,"sawtooth",.1);tone(160,.25,"sawtooth",.1,.15)},win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.25,"triangle",.15,i*.1))};
-const burst=(x,y,n=8)=>{if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;for(let i=0;i<n;i++){const p=document.createElement("i"),a=Math.random()*6.28,d=40+Math.random()*80;p.className="pt";p.style.cssText=`left:${x}px;top:${y}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;background:${["var(--ac)","var(--fg)","#ffc83d"][i%3]}`;document.body.appendChild(p);setTimeout(()=>p.remove(),700)}};
+const burst=(x,y,n=8)=>{if(S.perf)return;if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;for(let i=0;i<n;i++){const p=document.createElement("i"),a=Math.random()*6.28,d=40+Math.random()*80;p.className="pt";p.style.cssText=`left:${x}px;top:${y}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;background:${["var(--ac)","var(--fg)","#ffc83d"][i%3]}`;document.body.appendChild(p);setTimeout(()=>p.remove(),700)}};
 const shk=()=>{const m=$("#m");m.classList.remove("shk");void m.offsetWidth;m.classList.add("shk")};
 addEventListener("pointerdown",e=>{const b=e.target.closest("button");if(b&&!b.disabled){sfx.click();burst(e.clientX,e.clientY,6)}});
 const RS={fav:["Favoris",["fav","fw"]],mots:["Mots",["lw","wi","st","pz","rem","lot","vl"]],kana:["Écritures apprises",["lk"]],quiz:["Quiz et jeu",["res","wr","best","ev","gsel","gm"]],perso:["Quiz perso",["cq","ph"]],lect:["Lectures",["rf"]],serie:["Séries",["str","bst","last","days"]],chat:["Sensei",["chat"]],th:["Thème",["th","cu"]]};
@@ -586,11 +587,11 @@ $("#m").innerHTML=`<h1>Profil</h1><div class="card"><div class="row" style="flex
 <div class="card"><b>À retravailler</b><div class="row">${wr.map(x=>`<span style="font-size:1.7rem">${x}</span>`).join("")||'<span class="mu">Rien pour l’instant.</span>'}</div></div>
 <h2>Thèmes</h2>`+[["glassl","Liquid Glass clair","#cfe0ff","#2f6bff"],["glassd","Liquid Glass sombre","#2a2f6e","#7aa7ff"],["sakura","Sakura","#fff3f5","#e8335a"],["nuit","Nuit","#0e1220","#7c9cff"],["matcha","Matcha","#eaf2dc","#3b7a1c"],["encre","Encre","#fff","#000"]].map(x=>`<button class="sw" onclick="S.th='${x[0]}';save();theme();me()"><i style="background:linear-gradient(90deg,${x[2]} 50%,${x[3]} 50%)"></i>${x[1]}${S.th==x[0]?" ✓":""}</button>`).join("")+
 `<div class="card"><b>Personnalisé</b>${[["bg","Fond"],["cd","Cartes"],["fg","Texte"],["ac","Accent"]].map(x=>`<label>${x[1]}<input type="color" value="${S.cu[x[0]]}" oninput="S.cu.${x[0]}=this.value;S.th='perso';save();theme()"></label>`).join("")}<button class="p w" onclick="S.th='perso';save();me()">${S.th=="perso"?"Thème perso actif ✓":"Activer mon thème"}</button></div>
-<button class="w ${S.snd?"on":""}" onclick="S.snd=S.snd?0:1;save();me()">Bruitages ${S.snd?"activés":"désactivés"}</button><div class="card"><label>Volume des bruitages<input type="range" min="0" max="100" value="${Math.round(S.vs*100)}" aria-label="Volume des bruitages" oninput="S.vs=this.value/100;save()" onchange="sfx.ok()"></label><label>Volume des voix<input type="range" min="0" max="100" value="${Math.round(S.vv*100)}" aria-label="Volume des voix" oninput="S.vv=this.value/100;save()" onchange="say('こんにちは')"></label></div><div class="row s"><button onclick="say('こんにちは')">Tester la voix</button><button onclick="tuto()">Revoir le tutoriel</button></div><div class="mu">${jv("ja-JP")?"Voix japonaise détectée.":"Aucune voix japonaise détectée : le son passera par Internet."}</div><h2>Mises à jour</h2><div class="card"><div class="mu" style="line-height:1.5">Version installée : ${VER}. Quand tu publies une nouvelle version du site, l’app affiche une bannière « Nouvelle version disponible ».</div><div class="row s"><button class="p" onclick="chkUpd(1)">Vérifier maintenant</button>${"Notification"in window&&Notification.permission!="granted"?`<button onclick="enNotif()">Activer les notifications</button>`:""}</div>${"Notification"in window&&Notification.permission=="granted"?'<div class="mu">Notifications activées : tu es prévenu aussi quand l’app est en arrière-plan.</div>':""}</div><h2>Réinitialiser</h2><div class="card"><div class="row">${Object.keys(RS).map(k=>`<button onclick="rst('${k}')">${RS[k][0]}</button>`).join("")}</div><button class="w" onclick="rst('all')">Tout réinitialiser</button></div>`}
+<button class="w ${S.snd?"on":""}" onclick="S.snd=S.snd?0:1;save();me()">Bruitages ${S.snd?"activés":"désactivés"}</button><div class="card"><label>Volume des bruitages<input type="range" min="0" max="100" value="${Math.round(S.vs*100)}" aria-label="Volume des bruitages" oninput="S.vs=this.value/100;save()" onchange="sfx.ok()"></label><label>Volume des voix<input type="range" min="0" max="100" value="${Math.round(S.vv*100)}" aria-label="Volume des voix" oninput="S.vv=this.value/100;save()" onchange="say('こんにちは')"></label></div><div class="row s"><button onclick="say('こんにちは')">Tester la voix</button><button onclick="tuto()">Revoir le tutoriel</button></div><div class="mu">${jv("ja-JP")?"Voix japonaise détectée.":"Aucune voix japonaise détectée : le son passera par Internet."}</div><h2>Performance</h2><div class="card"><button class="w ${S.perf?"on":""}" onclick="S.perf=S.perf?0:1;save();theme();me()">Mode performance ${S.perf?"activé":"désactivé"}</button><div class="mu" style="margin-top:6px;line-height:1.5">Coupe les ombres, animations et particules : utile si ton téléphone est lent.</div></div><h2>Mises à jour</h2><div class="card"><div class="mu" style="line-height:1.5">Version installée : ${VER}. Quand tu publies une nouvelle version du site, l’app affiche une bannière « Nouvelle version disponible ».</div><div class="row s"><button class="p" onclick="chkUpd(1)">Vérifier maintenant</button>${"Notification"in window&&Notification.permission!="granted"?`<button onclick="enNotif()">Activer les notifications</button>`:""}</div>${"Notification"in window&&Notification.permission=="granted"?'<div class="mu">Notifications activées : tu es prévenu aussi quand l’app est en arrière-plan.</div>':""}</div><h2>Réinitialiser</h2><div class="card"><div class="row">${Object.keys(RS).map(k=>`<button onclick="rst('${k}')">${RS[k][0]}</button>`).join("")}</div><button class="w" onclick="rst('all')">Tout réinitialiser</button></div>`}
 theme();{const q=new URLSearchParams(location.search).get("go");go(S.tu==2&&["guide","home","kana","quiz","game","rd","tr","bot","me"].includes(q)?q:"home")}if(S.tu!=2)tuto();
 
 /* Mises à jour : change VER à chaque publication (et la même valeur dans sw.js) */
-const VER="2026.10.23.2",WEB=/^https?:/.test(location.protocol);let UB=null,UN="";
+const VER="2026.10.23.3",WEB=/^https?:/.test(location.protocol);let UB=null,UN="";
 function updBanner(v){if(UB||document.getElementById("ub"))return;UB=document.createElement("div");UB.id="ub";UB.setAttribute("role","alert");UB.style.cssText="position:fixed;left:64px;right:12px;top:calc(10px + env(safe-area-inset-top));z-index:260;background:var(--ac);color:var(--on);padding:10px 12px;border-radius:16px;display:flex;gap:8px;align-items:center;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.4)";
 UB.innerHTML=`<span style="flex:1;line-height:1.25">Nouvelle version${v?" "+esc(v):""} disponible</span><button id="ubg" style="background:var(--on);color:var(--ac)">Mettre à jour</button><button id="ubx" aria-label="Plus tard" style="background:none;color:inherit">✕</button>`;
 document.body.appendChild(UB);document.getElementById("ubg").onclick=()=>applyUpd(v);document.getElementById("ubx").onclick=()=>{UB.remove();UB=null}}
