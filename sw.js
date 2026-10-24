@@ -1,5 +1,5 @@
 /* ManjiLearn : service worker. Change VER avec la même valeur que dans index.html à chaque publication. */
-const VER="2026.10.24.1",V="manjilearn-"+VER,F=["./","index.html","manifest.webmanifest","icon-192.png","icon-512.png","icon-maskable-512.png"];
+const VER="2026.10.24.2",V="manjilearn-"+VER,F=["./","index.html","manifest.webmanifest","icon-192.png","icon-512.png","icon-maskable-512.png"];
 const notify=(t,o)=>self.registration.showNotification(t,Object.assign({icon:"icon-192.png",badge:"icon-192.png"},o));
 self.addEventListener("install",e=>{e.waitUntil(caches.open(V).then(c=>Promise.all(F.map(f=>c.add(f).catch(()=>{})))).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!=V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
