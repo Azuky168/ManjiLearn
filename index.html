@@ -213,7 +213,7 @@ $("#m").innerHTML=`${qtabs()}<div class="card"><div class="mu">Écriture</div><d
 ${nq()}<button class="p w" onclick="qstart()">Commencer</button></div>
 <div class="card"><b>Derniers résultats</b>${rs.map(r=>`<div class="mu">${new Date(r.d).toLocaleDateString("fr-FR")} : ${r.s} / ${r.n}</div>`).join("")||'<div class="mu">Aucun quiz pour l’instant.</div>'}</div>`}
 let LP=null,LA=0,LT="q",LC=null;
-function qstart(pool,all,ctx,nn){const dir=pool||qs.sc=="x"?"c":qs.dir,src=pool||ALL.filter(k=>qs.sc.includes(k.t));if(!src.length)return alert("Rien à interroger.");LP=pool||null;LA=all||0;LC=ctx||null;LT=qt;const n=nn||(all?src.length:qs.n);if(ctx&&ctx.mode=="d"&&!ctx.mx)return dstart(src,n);
+function qstart(pool,all,ctx,nn){const dir=ctx&&(ctx.rt||ctx.mode=="r")?"r":pool||qs.sc=="x"?"c":qs.dir,src=pool||ALL.filter(k=>qs.sc.includes(k.t));if(!src.length)return alert("Rien à interroger.");LP=pool||null;LA=all||0;LC=ctx||null;LT=qt;const n=nn||(all?src.length:qs.n);if(ctx&&ctx.mode=="d"&&!ctx.mx)return dstart(src,n);
 const l=samp(src,n,k=>(S.lk[k.t+k.c]?1:3)+(S.wr[k.t+k.c]||0)*2);
 Q={l,i:0,sc:0,fb:null,dir,miss:[]};qshow()}
 function qshow(){const k=Q.l[Q.i];let b;
@@ -224,7 +224,7 @@ $("#m").innerHTML=`<h1>Quiz</h1><div class="card">${mxb(Q.i,Q.l.length)}${qs.t&&
 const a=$("#qa");if(a&&!Q.fb)a.focus();qtimer()}
 function qans(v){if(Q.fb)return;clearInterval(QT);const k=Q.l[Q.i],ok=Q.dir=="r"?nr(v.trim().toLowerCase())==nr(k.r):Q.o[v]==k;
 Q.fb={ok,p:v};if(ok){sfx.ok();burst(innerWidth/2,innerHeight/3,22)}else{sfx.ko();shk();Q.miss.push({k,a:Q.dir=="r"?(v||""):(Q.o[v]?lab(Q.o[v]):"")})}if(ok)Q.sc++;else S.wr[k.t+k.c]=(S.wr[k.t+k.c]||0)+1;if(ok&&Q.dir=="c")S.lk[k.t+k.c]=S.lk[k.t+k.c]||0;save();qshow()}
-function qnext(){Q.i++;Q.fb=null;if(Q.i>=Q.l.length){if(MX){const r=Q;Q=null;return mxdone("c",r.sc,r.l.length,r.miss)}if(LC&&LC.mode=="m"&&!LC.s1){LC.s1=[Q.sc,Q.l.length];const u=[...new Set(Q.l)];Q=null;sfx.win();dstart(u,u.length);return}S.res.push({d:Date.now(),s:Q.sc,n:Q.l.length});hist(Q.sc,Q.l.length);act();save();sfx.win();burst(innerWidth/2,innerHeight/3,40);const r=Q;Q=null;$("#m").innerHTML=endx(r.sc+" / "+r.l.length,(r.sc>=r.l.length*.8?"Excellent travail !":"Continue, ça rentre.")+'<div class="mu">Série : '+cur()+" jour(s)</div>",r.miss,"qstart(LP,LA,LC&&{name:LC.name,mode:LC.mode})","quiz()",r.to);return}qshow()}
+function qnext(){Q.i++;Q.fb=null;if(Q.i>=Q.l.length){if(MX){const r=Q;Q=null;return mxdone(LC&&LC.mode=="r"?"r":"c",r.sc,r.l.length,r.miss)}if(LC&&LC.mode=="m"&&!LC.s1){LC.s1=[Q.sc,Q.l.length];const u=[...new Set(Q.l)];Q=null;sfx.win();dstart(u,u.length);return}S.res.push({d:Date.now(),s:Q.sc,n:Q.l.length});hist(Q.sc,Q.l.length);act();save();sfx.win();burst(innerWidth/2,innerHeight/3,40);const r=Q;Q=null;$("#m").innerHTML=endx(r.sc+" / "+r.l.length,(r.sc>=r.l.length*.8?"Excellent travail !":"Continue, ça rentre.")+'<div class="mu">Série : '+cur()+" jour(s)</div>",r.miss,"qstart(LP,LA,LC&&{name:LC.name,mode:LC.mode})","quiz()",r.to);return}qshow()}
 /* Jeu */
 let G=null,gs={sc:"h",lv:55},GE=null,gtab="h";
 const stopG=()=>{if(G){cancelAnimationFrame(G.raf);G=null}};
@@ -320,8 +320,8 @@ function samp(src,n,wf){const out=[];while(out.length<n){const r=S.prio&&wf?src.
 /* Quiz mélangé : QCM, dessin et mots dans une même série */
 let MX=null,QP=null;
 const mxb=(i,n)=>bar(MX?MX.i/MX.plan.length*100:i/n*100),mxt=(i,n,sc)=>MX?`Question ${MX.i+1} / ${MX.plan.length} · Score ${MX.sc+sc}`:`Question ${i+1} / ${n} · Score ${sc}`,mxl=(more)=>MX?(MX.i+1<MX.plan.length?"Suivant":"Résultat"):(more?"Suivant":"Résultat");
-const ctypes=c=>c.ty||({c:["c"],d:["d"],m:["c","d"],w:["w"]}[c.mode||"c"]||["c"]),TN={c:"QCM (choix)",d:"Dessin",w:"Mots"};
-function tpanel(){const ty=ctypes(CE);return`<div class="card"><b>Types d’exercices</b><div class="mu" style="margin:4px 0 8px;line-height:1.5">Active ce que tu veux : s’il y en a plusieurs, les exercices sont mélangés au hasard. « Part » règle la fréquence de chaque type.</div>${["c","d","w"].map(t=>`<div class="row" style="justify-content:space-between;flex-wrap:nowrap"><button class="${ty.includes(t)?"on":""}" style="flex:1" onclick="ctg('${t}')">${TN[t]}</button>${ty.includes(t)&&ty.length>1?`<span class="row" style="margin:0;flex-wrap:nowrap"><button onclick="ctw('${t}',-1)" aria-label="Moins">−</button><b style="min-width:2.4em;text-align:center">${(CE.tw&&CE.tw[t])||1}×</b><button onclick="ctw('${t}',1)" aria-label="Plus">+</button></span>`:""}</div>`).join("")}</div>`}
+const ctypes=c=>c.ty||({c:["c"],d:["d"],m:["c","d"],w:["w"],r:["r"]}[c.mode||"c"]||["c"]),TN={c:"QCM (choix)",d:"Dessin",r:"Romaji (1 symbole, saisie)",w:"Mots"};
+function tpanel(){const ty=ctypes(CE);return`<div class="card"><b>Types d’exercices</b><div class="mu" style="margin:4px 0 8px;line-height:1.5">Active ce que tu veux : s’il y en a plusieurs, les exercices sont mélangés au hasard. « Part » règle la fréquence de chaque type.</div>${["c","d","r","w"].map(t=>`<div class="row" style="justify-content:space-between;flex-wrap:nowrap"><button class="${ty.includes(t)?"on":""}" style="flex:1" onclick="ctg('${t}')">${TN[t]}</button>${ty.includes(t)&&ty.length>1?`<span class="row" style="margin:0;flex-wrap:nowrap"><button onclick="ctw('${t}',-1)" aria-label="Moins">−</button><b style="min-width:2.4em;text-align:center">${(CE.tw&&CE.tw[t])||1}×</b><button onclick="ctw('${t}',1)" aria-label="Plus">+</button></span>`:""}</div>`).join("")}</div>`}
 const ctg=t=>{CE.ty=ctypes(CE).slice();const i=CE.ty.indexOf(t);if(i>=0){if(CE.ty.length>1)CE.ty.splice(i,1)}else CE.ty.push(t);ce()};
 const ctw=(t,d)=>{CE.tw=CE.tw||{};CE.tw[t]=Math.max(1,Math.min(5,(CE.tw[t]||1)+d));ce()};
 function mxplay(id){const q=S.cq.find(x=>x.id==id);if(!q)return;const ty=ctypes(q),sg=cqp(id),n=qs.n;let P=[];
@@ -335,6 +335,7 @@ last=it.k?it.k.t+it.k.c:it.w.sy;plan.push(it)}
 MX={id,q,P,plan,i:0,sc:0,by:{},miss:[]};mxstep()}
 function mxstep(){const s=MX.plan[MX.i],nm=MX.q.name;
 if(s.t=="c")qstart([s.k],0,{mx:1,name:nm,mode:"c"},1);
+else if(s.t=="r")qstart([s.k],0,{mx:1,name:nm,mode:"r",rt:1},1);
 else if(s.t=="d"){LC={mx:1,name:nm,mode:"d"};dstart([s.k],1)}
 else{LC={mx:1,name:nm,mode:"w",id:MX.id};LT="q";WQ={id:MX.id,q:MX.q,P:MX.P,l:[{w:s.w,d:s.d}],i:0,sc:0,fb:null,miss:[]};wshow()}}
 function mxdone(t,sc,n,miss){const b=MX.by[t]=MX.by[t]||[0,0];b[0]+=sc;b[1]+=n;MX.sc+=sc;MX.miss.push(...miss);MX.i++;if(MX.i>=MX.plan.length)return mxend();mxstep()}
@@ -350,7 +351,7 @@ let WQ=null;
 const WDIR=[["sr","Symboles → Romaji"],["sf","Symboles → Français"],["rs","Romaji → Symboles"],["fs","Français → Symboles"],["rf","Romaji → Français"],["fr","Français → Romaji"]];
 const WNEU="ゃゅょっぁぃぅぇぉゎャュョッァィゥェォヮー・";
 const wkey=c=>{if(WNEU.includes(c))return"";const n=c.charCodeAt(0);return n>=0x3041&&n<=0x309f?"h"+c:n>=0x30a1&&n<=0x30fa?"k"+c:n>=0x4e00&&n<=0x9fff?"x"+c:null};
-const wok=(t,sel)=>[...t].every(c=>{const k=wkey(c);return k===""||(k&&sel[k])});
+const wok=(t,sel)=>[...t].every(c=>{const k=wkey(c);return !!k&&!!sel[k]});
 function wpool(sel){const o=[],u=new Set;DICT.forEach(e=>{if(!e.jp||!e.ro||!e.fr)return;const sy=wok(e.jp,sel)?e.jp:(e.kn&&wok(e.kn,sel)?e.kn:null);if(!sy||u.has(sy)||![...sy].some(c=>wkey(c)))return;u.add(sy);o.push({sy,kn:e.kn||sy,ro:e.ro,fr:e.fr})});return o}
 const wfn=t=>nz(t).replace(/[’']/g," ").replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ").replace(/^(le|la|les|un|une|des|du|l|d) /,"").trim();
 const wfs=t=>t.split(/\s*(?:,|;|\/|\bou\b)\s*/).map(wfn).filter(Boolean);
@@ -503,7 +504,7 @@ const n=performance.now();gx.v=(t.clientX-gx.lx)/Math.max(1,n-gx.lt)*1000/DW();g
 const dend=()=>{if(gx&&gx.m)dgo(dp+gx.v*.18>.5?1:0,gx.v);gx=null};addEventListener("touchend",dend);addEventListener("touchcancel",dend);
 dset(0);
 /* Historique, favoris de mots, scanner, histoire, radio */
-const MN={c:"Choix",d:"Dessin",m:"Mixte",w:"Mots",x:"Mélange"};
+const MN={r:"Romaji",c:"Choix",d:"Dessin",m:"Mixte",w:"Mots",x:"Mélange"};
 function cplay(id){const q=S.cq.find(x=>x.id==id);if(q.mode=="x"||(q.ty&&q.ty.length>1))return mxplay(id);if((q.mode||"c")=="w")return wplay(id);qstart(cqp(id),0,{name:q.name,mode:q.mode||"c"})}
 function hist(sc,n){const d=Date.now();if(LC&&LC.name)S.ph=S.ph.concat({d,name:LC.name,mode:LC.mode,s:sc,n}).slice(-60);if(LT=="e")S.ev=S.ev.concat({d,s:sc,n,m:LC&&LC.mode}).slice(-10);save()}
 const hh=()=>`<div class="card"><b>Historique</b>${S.ph.slice(-15).reverse().map(r=>`<div class="mu">${new Date(r.d).toLocaleDateString("fr-FR")} · ${esc(r.name)} · ${MN[r.mode||"c"]} : ${r.s} / ${r.n}</div>`).join("")||'<div class="mu">Aucun quiz perso joué pour l’instant.</div>'}</div>`;
@@ -660,7 +661,7 @@ $("#m").innerHTML=`<h1>Profil</h1><div class="card"><div class="row" style="flex
 theme();{const q=new URLSearchParams(location.search).get("go");go(S.tu==2&&["guide","home","kana","quiz","game","rd","tr","bot","me"].includes(q)?q:"home")}if(S.tu!=2)tuto();
 
 /* Mises à jour : change VER à chaque publication (et la même valeur dans sw.js) */
-const VER="2026.11.18.1",WEB=/^https?:/.test(location.protocol);let UB=null,UN="";
+const VER="2026.11.18.2",WEB=/^https?:/.test(location.protocol);let UB=null,UN="";
 function updBanner(v){if(UB||document.getElementById("ub"))return;UB=document.createElement("div");UB.id="ub";UB.setAttribute("role","alert");UB.style.cssText="position:fixed;left:64px;right:12px;top:calc(10px + env(safe-area-inset-top));z-index:260;background:var(--ac);color:var(--on);padding:10px 12px;border-radius:16px;display:flex;gap:8px;align-items:center;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.4)";
 UB.innerHTML=`<span style="flex:1;line-height:1.25">Nouvelle version${v?" "+esc(v):""} disponible</span><button id="ubg" style="background:var(--on);color:var(--ac)">Mettre à jour</button><button id="ubx" aria-label="Plus tard" style="background:none;color:inherit">✕</button>`;
 document.body.appendChild(UB);document.getElementById("ubg").onclick=()=>applyUpd(v);document.getElementById("ubx").onclick=()=>{UB.remove();UB=null}}
